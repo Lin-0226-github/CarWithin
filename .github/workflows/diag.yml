@@ -1,0 +1,7 @@
+name: Diagnostic
+on: workflow_dispatch
+jobs:
+  diag:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "ubuntu runner OK at $(date)"
