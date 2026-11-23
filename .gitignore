@@ -14,6 +14,10 @@ IdentityImport/
 *.pem
 *.key
 *.x963
+# Exception: bundled public test identity shipped with release IPAs, so source builds work too.
+!App/BundledIdentity/certificate.p7b
+!App/BundledIdentity/leaf.cer
+!App/BundledIdentity/private.x963
 *.mobileprovision
 *.provisionprofile
 # Build output and caches
