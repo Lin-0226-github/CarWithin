@@ -218,7 +218,7 @@ struct ReleaseDetailView: View {
     }
 
     var body: some View {
-        ScrollView {
+        ScrollView(.vertical, showsIndicators: true) {
             VStack(alignment: .leading, spacing: 22) {
                 VStack(alignment: .leading, spacing: 10) {
                     Label(status, systemImage: automatic ? "arrow.down.circle" : "info.circle")
@@ -279,8 +279,8 @@ struct ReleaseDetailView: View {
         .navigationTitle(automatic ? "版本更新" : "版本详情")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            if close != nil {
-                ToolbarItem(placement: .confirmationAction) {
+            ToolbarItemGroup(placement: .confirmationAction) {
+                if close != nil {
                     Button("完成") {
                         if automatic { AppUpdatePolicy().snooze() }
                         finish()

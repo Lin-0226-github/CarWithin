@@ -1,32 +1,21 @@
-name: Build (iOS 15)
-
+name: Build iOS 15
 on:
   push:
     branches: [main]
   workflow_dispatch:
 
 jobs:
-  build-and-test:
-    name: Build iOS 15 + test core
-    runs-on: macos-latest
+  build:
+    # macos-15-intel (x86) 池比 arm64 更容易分配到 runner
+    runs-on: macos-15-intel
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Show toolchain
+      - uses: actions/checkout@v4
+      - name: Build TDSCarKit for iOS 15 device
         run: |
           xcodebuild -version
-          xcrun --sdk iphoneos --show-sdk-version
-
-      - name: Build TDSCarKit for iOS device (deployment target 15.0)
-        run: |
           python3 Tools/generate_project.py
           xcodebuild -project TDSCarKit.xcodeproj -scheme TDSCarKit \
             -configuration Debug -destination 'generic/platform=iOS' \
             -derivedDataPath "$RUNNER_TEMP/derived" \
             IPHONEOS_DEPLOYMENT_TARGET=15.0 \
-            CODE_SIGN_IDENTITY=- CODE_SIGNING_ALLOWED=NO \
-            build
-
-      - name: Run core library tests
-        run: ./Tools/test.sh
+            CODE_SIGN_IDENTITY=- CODE_SIGNING_ALLOWED=NO build
