@@ -2101,13 +2101,13 @@ extension ReceiverViewController {
         let history = ReleaseHistoryView(installed: installedAppVersion, canDownload: { [weak self] in
             self?.running == false && UIApplication.shared.applicationState == .active
         })
-        let controller = UIHostingController(rootView: NavigationStack {
+        let controller = UIHostingController(rootView: NavigationView {
             history.toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("完成") { [weak self] in self?.updateSheet?.dismiss(animated: true) }
                 }
             }
-        })
+        }.navigationViewStyle(.stack))
         presentReleaseController(controller, automatic: false)
     }
 
@@ -2119,7 +2119,7 @@ extension ReceiverViewController {
             }, automatic: automatic, close: { [weak self] in
                 self?.updateSheet?.dismiss(animated: true)
             })
-        presentReleaseController(UIHostingController(rootView: NavigationStack { details }), automatic: automatic)
+        presentReleaseController(UIHostingController(rootView: NavigationView { details }.navigationViewStyle(.stack)), automatic: automatic)
     }
 
     private func presentReleaseController(_ controller: UIViewController, automatic: Bool) {

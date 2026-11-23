@@ -125,10 +125,8 @@ struct ReleaseHistoryView: View {
     var body: some View {
         List {
             ForEach(releases) { release in
-                NavigationLink {
-                    ReleaseDetailView(release: release, installed: installed, latestTag: latestTag,
-                                      canDownload: canDownload)
-                } label: {
+                NavigationLink(destination: ReleaseDetailView(release: release, installed: installed,
+                                                              latestTag: latestTag, canDownload: canDownload)) {
                     VStack(alignment: .leading, spacing: 6) {
                         HStack {
                             Text(release.name ?? "CarWithin \(release.version)")

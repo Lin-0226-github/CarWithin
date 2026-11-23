@@ -2,7 +2,7 @@
 
 [English](README.en.md) · **简体中文**
 
-[![Platform: iOS 16.0+](https://img.shields.io/badge/iOS-16.0%2B-blue)](#下载与安装) [![Status: released](https://img.shields.io/badge/status-released-brightgreen)](#快速开始) [![Release](https://img.shields.io/github/v/release/xmz28/CarWithin?label=release)](https://github.com/xmz28/CarWithin/releases/latest)
+[![Platform: iOS 15.0+](https://img.shields.io/badge/iOS-15.0%2B-blue)](#下载与安装) [![Status: released](https://img.shields.io/badge/status-released-brightgreen)](#快速开始) [![Release](https://img.shields.io/github/v/release/xmz28/CarWithin?label=release)](https://github.com/xmz28/CarWithin/releases/latest)
 
 CarWithin 在同一台 iPhone 上启动、显示和触控本机 CarPlay。你可以直接在 iPhone 上用导航、音乐等 CarPlay 应用，也可以把画面送到同一局域网的车机浏览器、平板、电脑或另一台手机。浏览器接收支持触控回传。
 
@@ -12,7 +12,7 @@ CarWithin 在同一台 iPhone 上启动、显示和触控本机 CarPlay。你可
 
 - [从 GitHub Releases 下载](https://github.com/xmz28/CarWithin/releases/latest)。当前版本为 **1.0.3（构建 15）**。
 - 下载 `CarWithin-1.0.3-unsigned.ipa`，用支持 IPA 的侧载工具按自己的签名方式签名并安装。按设备提示完成开发者信任或开启开发者模式。
-- 最低安装目标为 iOS/iPadOS 16.0，arm64；iOS 15 不支持安装。安装目标降低不等于所有旧系统均已实测，iOS 16.x 的本机 CarPlay、声音和后台行为仍需对应设备验证。实际可用性取决于设备、系统版本和签名方式。CarWithin 使用 iOS 私有接口，系统升级后可能需要重新验证。
+- 源码构建的最低部署目标为 iOS/iPadOS 15.0，arm64，支持 iOS 15 及更高版本。降低部署目标不等于所有旧系统均已实测，iOS 15.x 的本机 CarPlay、声音和后台行为仍需对应设备验证。实际可用性取决于设备、系统版本和签名方式。CarWithin 使用 iOS 私有接口，系统升级后可能需要重新验证。
 
 ## 快速开始
 
