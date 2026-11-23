@@ -10,6 +10,7 @@ jobs:
     runs-on: macos-15-intel
     steps:
       - uses: actions/checkout@v4
+
       - name: Build TDSCarKit for iOS 15 device
         run: |
           xcodebuild -version
@@ -19,3 +20,27 @@ jobs:
             -derivedDataPath "$RUNNER_TEMP/derived" \
             IPHONEOS_DEPLOYMENT_TARGET=15.0 \
             CODE_SIGN_IDENTITY=- CODE_SIGNING_ALLOWED=NO build
+
+      - name: Package unsigned IPA
+        id: package
+        run: |
+          APP="$RUNNER_TEMP/derived/Build/Products/Debug-iphoneos/TDSCarKit.app"
+          if [ ! -d "$APP" ]; then
+            echo "::error::未找到编译产物 $APP"
+            find "$RUNNER_TEMP/derived/Build/Products" -maxdepth 2 -name '*.app' -print || true
+            exit 1
+          fi
+          mkdir -p "$RUNNER_TEMP/ipa/Payload"
+          cp -R "$APP" "$RUNNER_TEMP/ipa/Payload/"
+          cd "$RUNNER_TEMP/ipa"
+          zip -qry CarWithin-iOS15-unsigned.ipa Payload
+          ls -lh CarWithin-iOS15-unsigned.ipa
+          echo "ipa=$RUNNER_TEMP/ipa/CarWithin-iOS15-unsigned.ipa" >> "$GITHUB_OUTPUT"
+
+      - name: Upload unsigned IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: CarWithin-iOS15-unsigned
+          path: ${{ steps.package.outputs.ipa }}
+          if-no-files-found: error
+          retention-days: 90
